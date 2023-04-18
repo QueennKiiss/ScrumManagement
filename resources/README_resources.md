@@ -3,3 +3,6 @@ This directory contains all the resources needed for webpage
 - Icons
 - logos
 - etc...
+
+Link to images source:
+https://unsplash.com/
