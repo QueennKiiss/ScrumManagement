@@ -1,0 +1,95 @@
+us status, usid, task id, area, user story name, user-story description-dod-deliverable, quotation
+done, e2u1, 014, dc ptb meter, Understand LEM meter's public HTTP API., "As a: test framework developer
+Need to: grasp how the LEM HTTP API works
+To allow: the implementation of the set of python methods and classes capable of creating the messages that help extract the required information from the meter's API."	"1. Understand how the LEM meter works with respect of the generation of signed meter records:
+    - Is the meter capable of holding the last record requested from the API?
+    - Does the inner working principles of the meter allow for the interrogation of signed records emitted in the past?
+    - Can be interrogated by two clients simultaneously about the last generated signed record?
+
+2. Identify what are the set of URL's that provide the following information:
+    - Last signed energy record emitted.
+    - Current date and time configuration."	1. Document with all the researched information., 5
+done, e2u1, ,dc ptb meter, Implement LEM meter CLI management tool., "As a: test framework developer
+Need to: implement a command line tool using python3 that interrogates the meter by using it's HTTP API
+To allow: having a means to test the meter's communication without needing the development of a robotframework sequence.
+1. The developer must implement the ""LEM meter management"" command line app.
+This app must expose a command line interface with dedicated commands that allow
+to get the following pieces of information:
+   - Energy record.
+   - Date and time record.
+   - If possible, the bundled records of energy measurement and the time of the
+     measurement for the last emitted energy signed measurement.
+
+This app must use the ""Cmd"" python module to manage the
+command line interface, and import the methods that deal with
+meter's message management from a dedicated module called
+""lem_ctrl.py""
+
+2. Create the ""lem_ctrl.py"" control module, that contains all the classes and
+   methods required to:
+   - Create the messages to interrogate the meter.
+   - Parse the messages sent from the LEM meter, and extract the different pieces of information required from the meter.",5
+done, e2u1, 029, dc ptb meter, Refactor LEM meter control code, "As a: test framework developer
+Need to: refactor the implementation of the app that allows to control the lem meter
+To allow: convert it into a generic tool that allows to manage more than one
+1. Refactor the lem_ctrl.py code to meet the architecture specified in the diagram ""meter_client_app_architecture_v1.1.odg"", available in the sharepoint's folder ""projects/23PD0001_SVF_Batch_3/diagrams"".
+2. The meter_client.py app must maintain the same functionalities that are currently available as part of the lem_ctrl.py module.
+3. The data returned by the following LemCtrl class methods must be as follows:
+    1. get_energy: must return:
+         - The energy amount transferred to the vehicle.
+         - The energy units.
+         - Timestamp: string with the date in which the signed energy record has been produced, in ISO 8601 format.
+     2. get_date: must return:
+         - The date in ISO 8601 format.
+1. A merge request must be accepted.
+2. The new distribution of the different python modules must be shown.
+3. A live demonstration showing how the meter_ctrl.py app works.",3
+done,e2u1,032,dc ptb meter,Implement keywords to extract meter's information,"As a: test user
+Need to: have a RF keyword extension lib that provides keywords that allow to interrogate the LEM meter
+To allow: using them as a means to retrieve information from the LEM meter without requiring the intervention of the SUT being checked durin g the execution of the PTB verification test session.
+1. The RF keyword extension lib must be stored within the folder ""libs/device_controllers/meters/"".
+2. The python module implementing the RF extension lib must adhere to the software test automation departmen'ts style guide.
+3. The RF extension library must make use of the module ""lem_ctrl.py"" as the provider of the low level classes and methods required to manage the format of the messages received from the LEM meter.
+4. The keywords must allow to retrieve the following information from the LEM meter:
+   - Energy record in the format provided by the lem_ctrl.py module.
+   - Date and time record in the format provided by the lem_ctrl.
+   - If possible, the bundled records of energy measurement and the time of the measurement for the last emitted energy signed measurement.
+   - Public key being used to check the signed energy records.
+5. The RF keywords created must fulfill the following style requirements:
+   - Must be sound english phrases, that describe the action they implement in a short and concise way.
+   - The keywords must adhere to the single responsibility principle.
+   - The keywords must be created in such a way that can be called in a robotframework recipe usin Gherkin syntax.
+   - If the keywords require arguments, they must be provided as part of the phrase.
+6. A Robotframework test development recipe must be created to demonstrate how the keywords must be used.
+7. The development recipe must be launched without requiring the usage of the svf_client.py app.
+1. A merge request must be accepted." 3
+new,e2u1,089,dc ptb meter,Implement keyword to extract OCMF formatted record,"As a: test user
+Need to: implement a keyword that extracts the OCMF formatted energy record from the meter
+To allow: having it's content as a reference to check OCPP reported records against.
+1. Implement a keyword that allows to execute a GET query to the endpoint ""v1/ocmf HTTP/1.1"" of the LEM meter API.
+2. Update the development test that allows to check the LEM related keywords, with the implemented keywords.
+1. A merge request must be accepted.",0
+new,e2u1,,dc ptb meter,Unify print messages to conform to log style on lem_ctrl.py,"As a: test user
+Need to: have an homogenized log message format throughout all the Robot Framework generated logs
+To allow: the reconstruction of an accurate event history that helps identifying the causes of possible issues found during test sessions.
+1. The print instructions that log the values of the registers recovered by using the lem_ctrl.py library must be logged using the standard ""logging"" python module.  The log messages must be streamed to the standard output.
+2. The outputs shown by the meter_client.py app on the command line as a result of running the implemented commands must be created by the meter_client.py code, not by the lem_ctrl.py library itself.
+3. The lem_ctrl.py must only be responsible for the data interchange with the device under control.
+4. The format to be used in the log messages must be the format used in the print functions found in the event_validation library.
+1. A merge request must be accepted.
+2. Live demonstration showing how the messages have been changed.", 0
+new,e2u1,,dc ptb meter,	Suport deciphering of signed measures - understand OCMF signature method,	"As a: test user
+Need to: have a RF keyword that allows to check the signed energy records reported by the meter
+To allow: comparing the signed energy record with the ohter energy record sources as part of the verification steps
+1. Document how the procedure of checking the signed meter record is to be implemented.
+2. Identify the set of python modules required to implement the signature verification, if new modules are required.
+3. Create a python application that allows to verify the authority of a LEM meter record by verifying it's signature. This application must comply the following requirements:
+    1. Accept a json file containing the extracted energy record from the meter in OCMF format.
+    2. Accept the public key of the LEM meter as a second argument.
+    3. Upon execution, the application must show by the standard outoput the following information:
+        1. A verdict upon the signature verification.
+        2. The energy record value, when the signature has been verified positively.",0
+new,e2u1,,dc ptb meter,Decipher LEM signed values - implement deciphering of message payload,	"As a: test user
+Need to: have a RF keyword that allows to decipher the signed energy records reported by the meter
+To allow: comparing the ciphered energy record with the ohter energy record sources as part of the verification steps",0
+new,e2u1,,dc ptb meter,Decipher LEM signed values - extract energy record and timestamp from deciphered data,,0
