@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{%block subtitle%}/Backlog{%endblock%}
+
+{% set active_page='backlog' %}
+
+{% block content %}
+  <div class="" style="width: 100%; background:transparent; padding: 1rem;">
+<!-- Path breadcrumb-->
+    <div class="m-0 my-2">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-custom overflow-hidden text-left bg-body-secondary border rounded-3" style="background:transparent: padding:0px">
+              <li class="breadcrumb-item bg-body-secondary">
+                <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">
+                  <svg class="bi" width="16" height="16">
+                    <use xlink:href="#house-door-fill">
+                      <symbol id="house-door-fill" viewBox="0 0 16 16">
+                        <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"></path>
+                      </symbol>
+                    </use>
+                  </svg>
+                  Home
+                </a>
+              </li>
+              <li class="breadcrumb-item">
+                <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Library</a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">
+                Data
+              </li>
+            </ol>
+        </nav>
+    </div>
+<!--Backlog content-->
+    <div class=" m-0 my-2" style="width:100%;">
+      <h3 class="fw-bolder">Backlog</h3>
+    </div>
+    <div class="d-flex">
+<!--List all the USs-->
+      <div class="d-flex flex-column flex-md-row ml-1 p-1 py-md-1 align-items-start justify-content-start" style="width:70%">
+          <div class="list-group" style="width:95%;">
+              <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between gap-3 py-3" aria-current="true">
+                <p style="background:lightgreen" class="p-1 mr-3 border fw-bolder rounded-lg">Done</p>
+                <p class="opacity-50 text-nowrap mr-3">eXuX</p>
+                <p class="opacity-50 text-nowrap mr-3">000</p>
+                <div class="d-flex gap-2 w-100 justify-content-between">
+                  <div>
+                    <h6 class="mb-0">List group item heading</h6>
+                  </div>
+                  <small class="opacity-50 text-nowrap">now</small>
+                </div>
+              </a>
+              <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+  <!--              <img src="https://github.com/twbs.png" alt="twbs" class="rounded-circle flex-shrink-0 mr-3" width="32" height="32">-->
+                <p style="background:lightcoral" class="p-1 mr-3 border fw-bolder rounded-lg">Staged</p>
+                <p class="opacity-50 text-nowrap mr-3">eXuX</p>
+                <p class="opacity-50 text-nowrap mr-3">000</p>
+                <div class="d-flex gap-2 w-100 justify-content-between">
+                  <div>
+                    <h6 class="mb-0">Another title here</h6>
+                  </div>
+                  <small class="opacity-50 text-nowrap">3d</small>
+                </div>
+              </a>
+              <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+  <!--              <img src="https://github.com/twbs.png" alt="twbs" class="rounded-circle flex-shrink-0 mr-3" width="32" height="32">-->
+                <p style="background:lightyellow" class="p-1 mr-3 border fw-bolder rounded-lg">Wip</p>
+                <p class="opacity-50 text-nowrap mr-3">eXuX</p>
+                <p class="opacity-50 text-nowrap mr-3">000</p>
+                <div class="d-flex gap-2 w-100 justify-content-between">
+                  <div>
+                    <h6 class="mb-0">Third heading</h6>
+                  </div>
+                  <small class="opacity-50 text-nowrap">1w</small>
+                </div>
+              </a>
+          </div>
+      </div>
+<!--US info card-->
+      <div class="m-0 ml-1 p-3 border border-dark bg-light" style="width:25%; border-radius:.5rem">
+        <h3 class="" style="">US Info</h3>
+        <label class="form-label">US title</label>
+        <input class="form-control" type="text" value="User story title" aria-label="readonly title example" readonly>
+        <label class="form-label mt-4">Definition of done (DoD)</label>
+        <input class="form-control" type="text" value="Definition of done for the selected user story" aria-label="readonly dod example" readonly style="height:15rem">
+        <p></p>
+      </div>
+    </div>
+  </div>
+{% endblock %}
